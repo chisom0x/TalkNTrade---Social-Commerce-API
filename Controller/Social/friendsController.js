@@ -90,13 +90,22 @@ exports.acceptFriendRequest = async (req, res, next) => {
         const reciever = await User.findById(recieverId)
         const senderId = req.params.senderId
         const sender = await User.findById(senderId)
-        // one persons friend isnt updating
         await User.findByIdAndUpdate(recieverId, {friends: senderId}, {new: true})
         await User.findByIdAndUpdate(senderId, {friends: recieverId}, {new: true})
-        // this did not work
-        sender.sentFriendRequests = sender.sentFriendRequests.filter(id => !recieverId.includes(id))
-        reciever.friendRequests = reciever.friendRequests.filter(id => !senderId.includes(id))
-
+        
+        if (Array.isArray(sender.sentFriendRequests)) {
+            sender.sentFriendRequests = sender.sentFriendRequests.filter(id => id.toString() !== recieverId.toString());
+        } else {
+            console.error('sender.sentFriendRequests is not an array');
+        }
+        
+        if (Array.isArray(reciever.friendRequests)) {
+            reciever.friendRequests = reciever.friendRequests.filter(id => id.toString() !== senderId.toString());
+        } else {
+            console.error('reciever.friendRequests is not an array');
+        }
+        
+        
         await reciever.save()
         await sender.save()
         res.status(200).json({
@@ -158,3 +167,38 @@ exports.friends = async (req, res, next) => {
       next (new AppError(500, 'something went wrong!'))
      }
   }
+
+exports.unFriend = async (req, res) => {
+    try {
+         const cookie = req.cookies.jwt
+    const decoded = await promisify(jwt.verify)(
+      cookie,
+      process.env.JWT_SECRET
+    );
+    const userId = decoded.id;
+    const user = await User.findById(userId)
+    const friendId = req.params.friendId
+    const friend = await User.findById(friendId)
+
+    if (Array.isArray(user.friends)) {
+        user.friends = user.friends.filter(id => id.toString() !== friendId.toString());
+    } else {
+        console.error('sender.sentFriendRequests is not an array');
+    }
+    
+    if (Array.isArray(friend.friends)) {
+        friend.friends = friend.friends.filter(id => id.toString() !== userId.toString());
+    } else {
+        console.error('reciever.friendRequests is not an array');
+    }
+    
+    await user.save()
+    await friend.save()
+
+    res.status(200).json({
+        status: 'Success',
+    })} catch(err) {
+        console.log(err)
+        next (new AppError(500, 'something went wrong!'))
+       }
+}
