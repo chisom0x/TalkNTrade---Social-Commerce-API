@@ -27,8 +27,18 @@ const userSchema = new mongoose.Schema({
         type: Boolean
     },
     posts: [{type: String}],
-    friends: [{type: String}],
-    friendRequests: [{type: String}],
+    friends: [{
+        type: mongoose.Schema.ObjectId,
+        ref: 'User',
+      }],
+    friendRequests: [{
+        type: mongoose.Schema.ObjectId,
+        ref: 'User',
+      }],
+    sentFriendRequests: [{
+        type: mongoose.Schema.ObjectId,
+        ref: 'User',
+     }],
     store: {
         type: String
     },
