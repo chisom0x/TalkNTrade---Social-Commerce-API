@@ -90,8 +90,8 @@ exports.acceptFriendRequest = async (req, res, next) => {
         const reciever = await User.findById(recieverId)
         const senderId = req.params.senderId
         const sender = await User.findById(senderId)
-        await User.findByIdAndUpdate(recieverId, {friends: senderId}, {new: true})
-        await User.findByIdAndUpdate(senderId, {friends: recieverId}, {new: true})
+        await User.findByIdAndUpdate(recieverId, {friends: senderId},)
+        await User.findByIdAndUpdate(senderId, {friends: recieverId},)
         
         if (Array.isArray(sender.sentFriendRequests)) {
             sender.sentFriendRequests = sender.sentFriendRequests.filter(id => id.toString() !== recieverId.toString());
