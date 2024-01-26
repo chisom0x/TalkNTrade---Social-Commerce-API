@@ -242,7 +242,7 @@ exports.deleteComment = async (req, res) => {
        }
 };
 
-// sampple using cloudinary to upload images
+// sample using cloudinary to upload images
 exports.addImage = async (req, res, next) => {
     try {
         const uploader = async (path) => await cloudinary.uploader.upload(path);
