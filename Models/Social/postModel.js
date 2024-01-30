@@ -16,7 +16,7 @@ const CommentSchema = new mongoose.Schema({
     commentId: { type: mongoose.Schema.ObjectId, ref: "Comment" },
     replies: [ReplySchema]
 });
-
+ 
 const PostSchema = new mongoose.Schema({
     firstname: { type: String },
     lastname: { type: String },
