@@ -4,7 +4,7 @@ TalkNTrade is a social commerce platform powered by a robust and feature-rich ba
 
 ## Features
 
-- User Authentication: Secure user signup and login.
+- User Authentication: Secure user signup, login and otp verification.
 - Friend Management: Send and accept friend requests.
 - Real-Time Chat: Communicate with friends in real-time.
 - Content Creation and Management: Create, delete, comment on, and like posts.
