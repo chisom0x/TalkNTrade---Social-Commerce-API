@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router()
 const storesController = require('../../Controller/Marketplace/storeController')
 const filterController = require('../../Controller/Marketplace/filterController')
-//const productController = require ('../../Controller/Marketplace/productController')
+const productController = require ('../../Controller/Marketplace/productController')
 //const searchController = require('../../Controller/Marketplace/searchController')
 //const middleware = require('../../Middlewares/checkStoreOwnerhip')
 //const multer = require('multer')
@@ -36,45 +36,33 @@ router
 
 // product routes
 
-// router.post('/add-product', upload.array('image'), productController.addProduct)
+router.post('/add-product', productController.addProduct)
 
-// router.post('/add-product-image/:productId', upload.array('image'), productController.addImage)
+router
+.route('/get-products')
+.get(productController.getAllProducts)
 
-// router
-// .route('/get-products/')
-// .get(productController.getAllProducts)
+router
+.route('/get-product-by-category/:categoryId')
+.get(productController.getProductsByCategory)
 
-// router
-// .route('/get-product-by-category/:categoryId')
-// .get(productController.getProductsByCategory)
+router
+.route('/get-product/:productId')
+.get(productController.getProduct)
 
-// router
-// .route('/get-product/:productId')
-// .get(productController.getProduct)
+router
+.route('/edit-product/:productId')
+.patch(productController.editProduct)
 
-// router
-// .route('/edit-product/:productId')
-// .patch(
-//     middleware.checkStoreOwnership, 
-//      productController.editProduct)
+router
+.route('/delete-product/:productId')
+.delete(productController.deleteProduct)
 
-// router
-// .route('/delete-product/:productId')
-// .delete(middleware.checkStoreOwnership, productController.deleteProduct)
+// reviews routes
 
-// router
-// .route('/delete-image/:productId')
-// .delete(productController.deleteProductImage)
-
-// router
-// .route('/search-product')
-// .get(searchController.searchProduct)
-
-// // reviews routes
-
-// router
-// .route('/products/:productId/add-review')
-// .post(productController.addReview)
+router
+.route('/products/:productId/add-review')
+.post(productController.addReview)
 
 
 // chat system
