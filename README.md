@@ -26,18 +26,20 @@ What things you need to install the software and how to install them:
 
 A step by step series of examples that tell you how to get a development environment running:
 
-1. Clone the repo: `git clone https://github.com/yourusername/talkntrade.git`
+1. Clone the repo: `git clone https://github.com/chisom0x/talkntrade.git`
 2. Install NPM packages: `npm install`
 3. Run the server: `npm start`
 
 ## Running the tests
 
-Explain how to run the automated tests for this system.
+ 👷🚧 under construction
 
 ## Built With
 
-- Node.js - The web framework used
+- Javascript - programming language
 - Express.js - Minimalist web framework for Node.js
 - MongoDB - Database
+- socket io - realtime communication
+- cloudinary - cloud storage
 
 
