@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router()
 const storesController = require('../../Controller/Marketplace/storeController')
-//const filterController = require('../../Controller/Marketplace/filterController')
+const filterController = require('../../Controller/Marketplace/filterController')
 //const productController = require ('../../Controller/Marketplace/productController')
 //const searchController = require('../../Controller/Marketplace/searchController')
 //const middleware = require('../../Middlewares/checkStoreOwnerhip')
@@ -23,20 +23,18 @@ router
 .route('/edit-store-info/:id')
 .patch(storesController.editStoreInfo)
 
+// product filter routes
+
+router
+.route('/add-category')
+.post(filterController.addCategory)
+
+router
+.route('/get-categories')
+.get(filterController.getAllCategories)
 
 
-// // product filter routes
-
-// router
-// .route('/add-category')
-// .post(filterController.addCategory)
-
-// router
-// .route('/get-categories')
-// .get(filterController.getAllCategories)
-
-
-// // product routes
+// product routes
 
 // router.post('/add-product', upload.array('image'), productController.addProduct)
 
